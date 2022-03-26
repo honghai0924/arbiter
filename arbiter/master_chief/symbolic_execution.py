@@ -173,7 +173,7 @@ class SymExec(StaticAnalysis, DerefHook):
 
         self._eliminate_false_positives(expr, init_val, state)
 
-        s = self.constrain(state, expr, init_val)
+        s = self.constrain(state=state, expr=expr, init_val=init_val, site=site)
         if s is not None:
             state = s
 
@@ -722,8 +722,7 @@ class SymExec(StaticAnalysis, DerefHook):
         Return a list of ArbiterReport's
         '''
         if pred_level == -1:
-            TP = self.convert_reports()
-            return 
+            return self.convert_reports()
 
         logger.info("Starting postprocessing")
         self._stats_filename = 'FP.json'
